@@ -1,8 +1,10 @@
 from .currency_beacon import BeaconCurrencyProvider
+from .mock import MockCurrencyProvider
 
 ALL_PROVIDERS = [
-    BeaconCurrencyProvider()
+    BeaconCurrencyProvider(),
+    MockCurrencyProvider()
 ]
 
 def get_active_providers():
-    return sorted(ALL_PROVIDERS, key=lambda p: p.priority)
+    return sorted([p for p in ALL_PROVIDERS if p.is_active], key=lambda p: p.priority)
